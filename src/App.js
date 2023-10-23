@@ -1,6 +1,8 @@
 import {NavBar} from "./NavBar";
 import {Main} from "./Main";
 import {useState} from "react";
+import {ListBox} from "./ListBox";
+import {WatchBox} from "./WatchBox";
 
 const tempMovieData = [
     {
@@ -31,9 +33,65 @@ export default function App() {
 
     return (
         <>
-            <NavBar movies={movies}/>
-            <Main movies={movies}/>
+            <NavBar>
+                <Search/>
+                <Numresults movies={movies}/>
+            </NavBar>
+
+            <Main>
+                <ListBox>
+                    <MovieList movies={movies}/>
+                </ListBox>
+                <WatchBox/>
+            </Main>
         </>
     );
+}
+
+function Numresults({movies}) {
+    return (
+        <p className="num-results">
+            Found <strong>{movies.length}</strong> results
+        </p>
+    )
+}
+
+function Search() {
+    const [query, setQuery] = useState("");
+
+    return (
+        <input
+            className="search"
+            type="text"
+            placeholder="Search movies..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+        />
+    )
+}
+
+function MovieList({movies}){
+    return (
+        <ul className="list">
+            {movies?.map((movie) => (
+                <Movie movie={movie} key={movie.imdbID}/>
+            ))}
+        </ul>
+    )
+}
+
+function Movie({movie}) {
+    return (
+        <li>
+            <img src={movie.Poster} alt={`${movie.Title} poster`}/>
+            <h3>{movie.Title}</h3>
+            <div>
+                <p>
+                    <span>📅</span>
+                    <span>{movie.Year}</span>
+                </p>
+            </div>
+        </li>
+    )
 }
 

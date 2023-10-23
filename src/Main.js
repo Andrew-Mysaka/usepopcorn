@@ -1,11 +1,7 @@
-import {ListBox} from "./ListBox";
-import {WatchBox} from "./WatchBox";
-
-export function Main({movies}) {
+export function Main({children}) {
     return (
         <main className="main">
-            <ListBox movies={movies}/>
-            <WatchBox/>
+            {children}
         </main>
     )
 }
