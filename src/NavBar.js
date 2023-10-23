@@ -1,19 +1,19 @@
 import {useState} from "react";
 
-export function NavBar() {
+export function NavBar({movies}) {
     return (
         <nav className="nav-bar">
             <Logo/>
             <Search/>
-            <Numresults/>
+            <Numresults movies={movies}/>
         </nav>
     )
 }
 
-function Numresults() {
+function Numresults({movies}) {
     return (
         <p className="num-results">
-            Found <strong>X</strong> results
+            Found <strong>{movies.length}</strong> results
         </p>
     )
 }

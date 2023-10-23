@@ -1,10 +1,10 @@
 import {ListBox} from "./ListBox";
 import {WatchBox} from "./WatchBox";
 
-export function Main() {
+export function Main({movies}) {
     return (
         <main className="main">
-            <ListBox/>
+            <ListBox movies={movies}/>
             <WatchBox/>
         </main>
     )
