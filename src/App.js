@@ -1,6 +1,6 @@
 import {NavBar} from "./NavBar";
 import {Main} from "./Main";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Box} from "./Box";
 
 const tempMovieData = [
@@ -58,9 +58,11 @@ export default function App() {
     const [movies, setMovies] = useState(tempMovieData);
     const [watched, setWatched] = useState(tempWatchedData);
 
-    // fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`)
-    //     .then(res => res.json())
-    //     .then(data => setMovies(data.Search));
+    useEffect(function () {
+        fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`)
+            .then(res => res.json())
+            .then(data => setMovies(data.Search));
+    }, []);
 
     return (
         <>
