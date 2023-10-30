@@ -345,7 +345,7 @@ function Search({query, setQuery}) {
         document.addEventListener("keydown", callback);
 
         return () => document.addEventListener("keydown", callback);
-    }, [])
+    }, [setQuery])
 
     return (
         <input
