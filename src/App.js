@@ -14,7 +14,7 @@ const KEY = '979514d0';
 export default function App() {
     const [query, setQuery] = useState("");
     const [selectedId, setSelectedId] = useState(null);
-    const {movies, isLoading, error} = useMovies(query, handleCloseMovie);
+    const {movies, isLoading, error} = useMovies(query);
 
     const [watched, setWatched] = useLocalStorageState([], "watched");
 
@@ -28,7 +28,6 @@ export default function App() {
 
     function handleAddWatched(movie) {
         setWatched(watched => [...watched, movie]);
-        // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
     }
 
     function handleDeleteWatched(id) {
@@ -45,7 +44,6 @@ export default function App() {
             <Main>
                 <Box>
                     <MovieList movies={movies} onSelectMovie={handleSelectMovie}/>
-                    {/*{isLoading ? <Loader/> : <MovieList movies={movies} />}*/}
                     {isLoading && <Loader/>}
                     {isLoading && !error && <MovieList movies={movies}/>}
                     {error && <ErrorMessage message={error}/>}
@@ -67,16 +65,6 @@ export default function App() {
                         )
                     }
                 </Box>
-
-                {/*<Box element={*/}
-                {/*    <MovieList movies={movies}/>*/}
-                {/*}/>*/}
-                {/*<Box element={*/}
-                {/*    <>*/}
-                {/*        <WatchedSummary watched={watched}/>*/}
-                {/*        <WatchedMoviesList watched={watched}/>*/}
-                {/*    </>*/}
-                {/*}/>*/}
             </Main>
         </>
     );
